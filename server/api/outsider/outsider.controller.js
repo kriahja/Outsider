@@ -61,14 +61,16 @@ function removeEntity(res) {
 
 // Gets a list of Outsiders
 export function index(req, res) {
-  Outsider.findAsync()
+  Outsider.find({}).populate('owner', 'name email')
+    .execAsync()
     .then(responseWithResult(res))
     .catch(handleError(res));
 }
 
 // Gets a single Outsider from the DB
 export function show(req, res) {
-  Outsider.findByIdAsync(req.params.id)
+  Outsider.findById(req.params.id).populate('owner', 'name email')
+    .execAsync()
     .then(handleEntityNotFound(res))
     .then(responseWithResult(res))
     .catch(handleError(res));

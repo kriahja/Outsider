@@ -7,7 +7,39 @@
 import Thing from '../api/thing/thing.model';
 import User from '../api/user/user.model';
 import Cat from '../api/cat/cat.model';
+import Outsider from '../api/outsider/outsider.model';
+import Product from '../api/product/product.model';
 
+Outsider.find({}).removeAsync()
+.then(() => {
+  Outsider.create({
+    Store: 'Outsider',
+    year: 2016,
+    owner: '56dd2e507016b76419d107ek',
+    iconurl: 'Here comes a pictureLink',
+    orders: [
+      {product:'56dd2e507016b76419d107eh'},
+        {product:'56dd2e507016b76419d107eg'}
+    ],
+  });
+});
+
+Product.find({}).removeAsync()
+.then(() => {
+  Product.create({
+    id: '56dd2e507016b76419d107eh',
+    name: 'Shampoo1',
+    details: 'Pretty awesome',
+    picture: 'Here comes a pictureLink',
+    video: 'Here comes a videoLink'
+  }, {
+    id:'56dd2e507016b76419d107eg',
+    name: 'Shampoo2',
+    details: 'Hoopla!',
+    picture: 'Here comes a pictureLink',
+    video: 'Here comes a videoLink'
+  });
+});
 
 Cat.find({}).removeAsync()
   .then(() => {
@@ -57,6 +89,7 @@ Thing.find({}).removeAsync()
 User.find({}).removeAsync()
   .then(() => {
     User.createAsync({
+      _id: '56dd2e507016b76419d107ek',
       provider: 'local',
       name: 'Test User',
       email: 'test@example.com',
